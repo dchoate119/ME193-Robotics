@@ -40,21 +40,67 @@ dm = doubleMotor()
 
 def DoRed():
     print("red")
+    # Double motor: both sides clockwise for the full 5 seconds.
+    dm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE, motor=le.MOTOR_LEFT)
+    dm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE, motor=le.MOTOR_RIGHT)
+
+    # Single motor: clockwise 2.5 s, then counter-clockwise 2.5 s.
+    sm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE)
+    time.sleep(2.5)
+    sm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_COUNTERCLOCKWISE)
+    time.sleep(2.5)
+
+    sm.stop()
+    dm.stop()
 
 
 
 def DoYellow():
     print("yellow")
+    # Double motor: sides spin opposite ways (left clockwise, right counter-clockwise).
+    dm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE, motor=le.MOTOR_LEFT)
+    dm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_COUNTERCLOCKWISE, motor=le.MOTOR_RIGHT)
+
+    # Single motor: clockwise for the same 5 seconds.
+    sm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE)
+    time.sleep(5)
+
+    sm.stop()
+    dm.stop()
 
 
 
 def DoBlue():
     print("blue")
+    # Double motor: both sides clockwise for the full 5 seconds.
+    dm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE, motor=le.MOTOR_LEFT)
+    dm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE, motor=le.MOTOR_RIGHT)
+
+    # Single motor: 0.5 s on, 0.5 s off, repeated 5 times (5 seconds total).
+    for _ in range(5):
+        sm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE)
+        time.sleep(0.5)
+        sm.stop()
+        time.sleep(0.5)
+
+    dm.stop()
 
 
 
 def DoTeal():
-    pass
+    print("teal")
+    # Single motor: clockwise for the full 5 seconds.
+    sm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE)
+
+    # Double motor: both sides clockwise 0.5 s on, 0.5 s off, repeated 5 times.
+    for _ in range(5):
+        dm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE, motor=le.MOTOR_LEFT)
+        dm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE, motor=le.MOTOR_RIGHT)
+        time.sleep(0.5)
+        dm.stop()
+        time.sleep(0.5)
+
+    sm.stop()
 
 
 
