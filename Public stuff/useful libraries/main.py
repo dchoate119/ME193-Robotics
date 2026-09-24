@@ -34,6 +34,11 @@ sm = singleMotor()
 dm = doubleMotor()
 
 
+def beep():
+    """Beep the single motor's built-in speaker."""
+    sm.beep()
+
+
 
 # --- Empty handler functions ----------------------------------------------
 # Fill these in with whatever behavior you want.
@@ -106,6 +111,7 @@ def DoTeal():
 # Codrin
 def DoGreen():
     print("green")
+    beep()
     sm.run(50)   # single: forward, medium
     dm.run(50)   # double: drive forward, medium
 
@@ -113,6 +119,7 @@ def DoGreen():
 # Codrin
 def DoPurple():
     print("purple")
+    beep()
     sm.run(-50)  # single: reverse, medium
     dm.run(-50)  # double: drive backward, medium
 
@@ -120,6 +127,7 @@ def DoPurple():
 # Codrin
 def DoWhite():
     print("white")
+    beep()
     sm.run(100)  # single: forward, full speed
     dm.set_speed_left(30)   # double: both motors counterclockwise (spins in place)
     dm.set_speed_right(30)
@@ -130,6 +138,7 @@ def DoWhite():
 # Codrin
 def DoMagenta():
     print("magenta")
+    beep()
     sm.run(-100)  # single: reverse, full speed
     dm.run(20)    # double: creep forward, slow
 
