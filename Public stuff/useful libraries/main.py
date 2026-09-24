@@ -125,12 +125,18 @@ def DoMagenta():
 
 
 def DoOrange():
-    pass
+    # Stop driving and spin the single motor (e.g. an arm or flag).
+    print("orange")
+    dm.stop()
+    sm.run(50)
 
 
 
 def DoAzure():
-    pass
+    # Stop the single motor and drive forward.
+    print("azure")
+    sm.stop()
+    dm.run(50)
 
 
 
