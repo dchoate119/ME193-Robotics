@@ -110,7 +110,10 @@ def DoLeftUp():
 
 
 def DoLeftDown():
-    pass
+    # Emergency stop: halt both motors.
+    print("left down: stop")
+    sm.stop()
+    dm.stop()
 
 
 
