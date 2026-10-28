@@ -8,7 +8,7 @@ Then copy lelib.py from the SimpleLE repo into this project's folder.
 import time
 
 import legoeducation as le
-from lelib import colorSensor, controller, singleMotor, doubleMotor
+from lelib import colorSensor, controller
 
 # --- Bluetooth card info for your hardware -------------------------------
 # Fill these in with the color/serial printed on your LEGO connection card.
@@ -17,26 +17,20 @@ from lelib import colorSensor, controller, singleMotor, doubleMotor
 COLOR_SENSOR_CARD_COLOR = le.LEGO_COLOR_MAGENTA
 COLOR_SENSOR_CARD_SERIAL = "0998"
 
-CONTROLLER_CARD_COLOR = le.LEGO_COLOR_MAGENTA
-CONTROLLER_CARD_SERIAL = "0998"
+CONTROLLER_CARD_COLOR = le.LEGO_COLOR_ORANGE
+CONTROLLER_CARD_SERIAL = 7552
 
-SINGLE_MOTOR_CARD_COLOR = le.LEGO_COLOR_MAGENTA
-SINGLE_MOTOR_CARD_SERIAL = "0998"
-
-DOUBLE_MOTOR_CARD_COLOR = le.LEGO_COLOR_MAGENTA
-DOUBLE_MOTOR_CARD_SERIAL = "0998"
+SINGLE_MOTOR_CARD_COLOR = le.LEGO_COLOR_ORANGE
+SINGLE_MOTOR_CARD_SERIAL = 7552
 
 POLL_DELAY_S = 0.1  # seconds between reads
 
-# Motors are module-level so the Do* handlers below can use them,
-# e.g. sm.run(50) or dm.turn_left(90). They're connected in main().
-sm = singleMotor()
-dm = doubleMotor()
+motor = None  # set to a connected singleMotor in main()
 
 
 def beep():
     """Beep the single motor's built-in speaker."""
-    sm.beep()
+    motor.beep()
 
 
 
@@ -44,19 +38,7 @@ def beep():
 # Fill these in with whatever behavior you want.
 
 def DoRed():
-    print("red")
-    # Double motor: both sides clockwise for the full 5 seconds.
-    dm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE, motor=le.MOTOR_LEFT)
-    dm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE, motor=le.MOTOR_RIGHT)
-
-    # Single motor: clockwise 2.5 s, then counter-clockwise 2.5 s.
-    sm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_CLOCKWISE)
-    time.sleep(2.5)
-    sm.motor_run(direction=le.MOTOR_MOVE_DIRECTION_COUNTERCLOCKWISE)
-    time.sleep(2.5)
-
-    sm.stop()
-    dm.stop()
+    print("not red")
 
 
 
@@ -272,14 +254,16 @@ def handle_controller(ctl):
 # --- Main loop -------------------------------------------------------------
 
 def main():
+    global motor
+
     sensor = colorSensor()
     sensor.connect(card_serial=COLOR_SENSOR_CARD_SERIAL, card_color=COLOR_SENSOR_CARD_COLOR)
 
     ctl = controller()
     ctl.connect(card_serial=CONTROLLER_CARD_SERIAL, card_color=CONTROLLER_CARD_COLOR)
 
-    sm.connect(card_serial=SINGLE_MOTOR_CARD_SERIAL, card_color=SINGLE_MOTOR_CARD_COLOR)
-    dm.connect(card_serial=DOUBLE_MOTOR_CARD_SERIAL, card_color=DOUBLE_MOTOR_CARD_COLOR)
+    motor = singleMotor()
+    motor.connect(card_serial=SINGLE_MOTOR_CARD_SERIAL, card_color=SINGLE_MOTOR_CARD_COLOR)
 
     try:
         while True:

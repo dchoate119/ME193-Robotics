@@ -18,3 +18,18 @@ subset of the class repo that's meant to be shared.
 - [virtualTesting/](virtualTesting/) — run `setup_test_env.py` to spin up a
   disposable virtual environment with `legoeducation` installed and drop
   into a `python3` REPL, no manual venv setup required.
+- [Debugging/](Debugging/) — a single-page MQTT console: subscribe to and
+  publish on any topic, on any broker, from the browser. Open `index.html`
+  directly, no install needed.
+- [mujoco-hpc/](mujoco-hpc/) — run MuJoCo physics simulations on the Tufts
+  HPC cluster from your own laptop. `python3 setup.py` checks your login and
+  installs everything; `python3 runIt.py --gpu 08_demo.py` runs a bouncing-ball
+  simulation on a GPU node and brings the video home.
+  Edit `config.sh` with your Tufts username first.
+- [QLearn/](QLearn/) — a browser-based Q-learning visualizer (PyScript +
+  Web Bluetooth): train a LEGO Education robot on Silly Walk, Line Follower
+  and Maze Solver tasks while watching the Q-table update live. Needs
+  Chrome or Edge; no install.
+  [Open it online](https://chrisbuerginrogers.github.io/ME193-Robotics/Public%20stuff/QLearn/).
+  Imported from
+  [ceeoinnovations/FETLab-Summer-2026](https://github.com/ceeoinnovations/FETLab-Summer-2026/tree/main/QLearn-NewActivities-PyScript).
